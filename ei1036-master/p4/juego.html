@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Find Homer</title>
+<meta charset="UTF-8" />
+<style type="text/css">
+  td{
+    height: 200px;
+    width: 200px;
+  }
+</style>
+<script>
+var acabado = false;
+var tot =0;
+var cantS=3;
+var hom=0;
+var mapa = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
+var solucion =[0,0,1,0,1,1,0,0,0,];
+
+var jugador = 1;
+function dibujar(){
+ for(i=0; i<9; i++){
+ if(mapa[i] == 0) document.getElementById("c"+i).style="background-color: white";
+ if(mapa[i] == 1) document.getElementById("c"+i).style.backgroundImage = "url('https://www.gmkfreelogos.com/logos/S/img/Simpsons.gif')";
+ if(mapa[i] == 2) document.getElementById("c"+i).style.backgroundImage = "url(http://images3.wikia.nocookie.net/__cb20090918214443/lossimpson/es/images/thumb/8/84/The_Yes_Guy.png/200px-The_Yes_Guy.png)";
+ }
+}
+function pcelda(celda){
+
+if(!acabado){
+if (mapa[celda]==0) {
+ if (solucion[celda]==0){
+ mapa[celda]=2;
+ } else {
+ mapa[celda]=1; 
+ hom+=1;
+ }
+ tot+=1;
+} else {
+window.alert("No puedes pulsar sobre una celda coloreada");
+}
+dibujar();
+ var r = ganador();
+ switch(r){
+  case 0:
+   break;
+  case 1:
+  acabado= true;
+   window.alert("Enhorabuena solo has necesitado: "+tot+" Intentos");
+   break;
+  case 2:
+   break;
+  case 3:
+   window.alert("¡Empate!");
+   break; 
+}
+}else{
+  elegir();
+}
+}
+function ganador(){
+if(hom== cantS){
+  return 1;
+
+} else {
+return 2;
+}
+}
+function elegir() {
+if (confirm('reiniciar juego?')) {
+var acabado = false;
+var tot =0;
+var cantS=3;
+var hom=0;
+mapa = [0, 0, 0, 0, 0, 0, 0, 0, 0,];
+dibujar();
+} else {
+alert('no se borra nada');
+}
+}
+</script>
+</script>
+</head>
+<body>
+<table align="center" border="0">
+<tr>
+<td width="300" align="center">Find Homer</td>
+</tr>
+</table>
+<table align="center" border="1">
+ <tr>
+  <td width="100" height="100" id="c0" onclick="pcelda(0)"></td>
+  <td width="100" height="100" id="c1" onclick="pcelda(1)"></td>
+  <td width="100" height="100" id="c2" onclick="pcelda(2)"></td>
+ </tr>
+ <tr>
+  <td width="100" height="100" id="c3" onclick="pcelda(3)"></td>
+  <td width="100" height="100" id="c4" onclick="pcelda(4)"></td>
+  <td width="100" height="100" id="c5" onclick="pcelda(5)"></td>
+ </tr>
+ <tr>
+  <td width="100" height="100" id="c6" onclick="pcelda(6)"></td>
+  <td width="100" height="100" id="c7" onclick="pcelda(7)"></td>
+  <td width="100" height="100" id="c8" onclick="pcelda(8)"></td>
+ </tr>
+ </table>
+ <table align="center" border="0">
+  <tr>   
+   <td width="300"  align="center"><br />
+    <a href="javascript:location.reload()">
+    <button>Reiniciar</button></a>
+   </td>   
+  </tr>
+</table>
+</body>
+</html>
